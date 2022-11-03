@@ -40,14 +40,23 @@ background(0);
 
 void drawplayer()
 {
+  LevelCheck();
   stroke(255);
-  if (skin == 1) {
-    fill(255);
+  if (skinGreen == true) {
+    fill(0, 255, 0);
     rect(w,z,15,85);
   }
-  if (skin == 2) {
+  if (skinPink == true) {
     fill(245, 40, 145);
     rect(w,z,15,85);
+  }
+  if (skinRed == true) {
+    fill(255, 0, 0);
+    rect(w, z, 15, 85);
+  }
+  if (noSkin == true) {
+  fill(255);
+  rect(w, z, 15, 85);
   }
   fill(255);
   ellipse(x,y,20,20);
