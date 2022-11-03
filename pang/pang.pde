@@ -2,9 +2,12 @@ int x, y;
 int moveX, moveY;
 int moveW, moveZ;
 int w, z;
+int skin;
+int score;
 
 void setup() {
-  
+ skin = 1;
+ score = 0;
  size(400,400);
  background(0);
 
@@ -18,6 +21,8 @@ void setup() {
  z = 60;
   
 }
+
+
 void draw()
 {
 clean();
@@ -26,21 +31,33 @@ move();
 collisions();
 }
 
+
 void clean()
 {
 background(0);
 }
 
+
 void drawplayer()
 {
   stroke(255);
-  fill(255);
-  rect(w,z,15,85);
+  if (skin == 1) {
+    fill(255);
+    rect(w,z,15,85);
+  }
+  if (skin == 2) {
+    fill(245, 40, 145);
+    rect(w,z,15,85);
+  }
   fill(255);
   ellipse(x,y,20,20);
   stroke(255);
   line(width/2,0,width/2,height);
+  textSize(11);
+  text("Score: ",320,10);
+  text(score,360,10);
 }
+
 
 void move()
 {
@@ -50,38 +67,56 @@ void move()
   if(keyPressed)
  {
    if(keyCode == DOWN && z+85<400) {
+     
      z+=4;
+     
    }
+   
    if(keyCode == UP && z>0) {
+     
      z-=4;
+     
+   }
+   
+   if(key == 's') {
+     
+     if (skin < 2) {
+       skin += 1;
+     } else {
+       skin = 1;
+     }
+     
    }
  }
 }
+
+
 void collisions()
 {
-// si on est trop à droite ET le déplacement horizontal est positif
-if (x > width-10 && moveX > 0)
+  if (x > width-10 && moveX > 0)
   {
-  moveX = -moveX; // inverser la valeur
-  }
+  moveX = -moveX;
+}
 
-// si on est trop bas et le déplacement vertical est positif
+
 if (y > width-10 && moveY > 0)
   {
-  moveY = -moveY; // inverser la valeur
+  moveY = -moveY;
   }
 
-// si on est trop haut et le déplacement vertical est negatif
 if (y < 10 && moveY < 10)
   {
-  moveY = -moveY; // inverser la valeur
+  moveY = -moveY;
+  score += 1;
+
   }
-// si la balle rebondit sur le plateau
+  
 if (x < w+25 && x > w+10 && y+10 > z && y-10 < z+85)
   {
-  moveX = abs(moveX); // rendre positive cette valeur
+  moveX = abs(moveX);
+  score += 1;
   }
-// gestion de la fin de partie
+  
 if (x < -12)
   {
   moveX = 0;
@@ -99,6 +134,7 @@ if (x < -12)
       y = 200;
       moveX = int(random(4,8));
       moveY = int(random(-4,-1));
+      score = 0;
       }
     }
   }
