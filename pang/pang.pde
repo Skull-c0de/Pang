@@ -86,11 +86,11 @@ if (x < -12)
   {
   moveX = 0;
   moveY = 0;
-  fill(255,0,0);
+  fill(255,255,255);
   textSize(28);
-  text("GAMEOVER",130,150);
+  text("GAME OVER",130,150);
   textSize(18);
-  text("appuyer sur ' r ' pour rejouer",100,180);
+  text("Appuyez sur ' r ' pour rejouer !",100,180);
   if(keyPressed)
     {
     if(key == 'r')
