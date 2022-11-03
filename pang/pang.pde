@@ -18,3 +18,42 @@ void setup() {
  z = 60;
   
 }
+void draw()
+{
+clean();
+drawplayer();
+move();
+collisions();
+}
+
+void clean()
+{
+background(0);
+}
+
+void drawplayer()
+{
+  stroke(255);
+  fill(255);
+  rect(w,z,15,85);
+  fill(255);
+  ellipse(x,y,20,20);
+  stroke(255);
+  line(width/2,0,width/2,height);
+}
+
+void move()
+{
+  x = x + moveX;
+  y = y + moveY;
+
+  if(keyPressed)
+ {
+   if(keyCode == DOWN && z+85<400) {
+     z+=4;
+   }
+   if(keyCode == UP && z>0) {
+     z-=4;
+   }
+ }
+}
